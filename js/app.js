@@ -33,13 +33,22 @@
  * 
 */
 
-// build the nav
+// Build navigation based on page content.
+function buildNav(){
+
+}
 
 
-// Add class 'active' to section when near top of viewport
+// Add class 'activeSection' to section when near top of viewport.
+function setActiveSection(){
+
+}
 
 
-// Scroll to anchor ID using scrollTO event
+// Scroll to anchor ID using scrollTO event.
+function scrollToSection(){
+
+}
 
 
 /**
@@ -48,9 +57,16 @@
  * 
 */
 
-// Build menu 
+document.addEventListener('DOMContentLoaded', function (){
+    
+    buildNav();
 
-// Scroll to section on link click
+    setActiveSection();
 
-// Set sections as active
+    scrollToSection();
 
+    // apply the following event handlers
+        // Scroll to section on link click
+
+        // Set sections as active
+});
