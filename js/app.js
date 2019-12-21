@@ -29,6 +29,13 @@ const activeStyleClass = 'activeSection';
 */
 
 
+function setActiveLink( selectedLink ){
+
+    
+
+}
+
+
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -47,7 +54,7 @@ function buildNav(){
     for( const section of sections ){
 
         let sectionTitle = section.getAttribute( 'data-nav' );
-        navHTML += `<li class="menu__link">${sectionTitle}</li>`;
+        navHTML += `<li class="menu__link" data-nav="${sectionTitle}">${sectionTitle}</li>`;
 
     }
 
@@ -98,7 +105,7 @@ function scrollToSection( event ){
     if( event ){
 
         const headerHeight = document.querySelector( 'header' ).offsetHeight;
-        const sectionElement = document.querySelector( `[data-nav="${event.target.innerText}"]` );
+        const sectionElement = document.querySelector( `section[data-nav="${event.target.innerText}"]` );
         const elementTop = sectionElement.offsetTop;
 
         window.scrollTo( 0, elementTop - headerHeight );
