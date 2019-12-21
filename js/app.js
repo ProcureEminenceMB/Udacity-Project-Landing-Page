@@ -36,6 +36,21 @@
 // Build navigation based on page content.
 function buildNav(){
 
+    let navHTML = '';
+    let navContainer = document.querySelector( '#navbar__list' ); // Get a reference to the nav container element.
+
+    const sections = document.querySelectorAll( 'section' ); // Store a non-live NodeList containing all section elements.
+
+    // Scan through all sections and create links for the nav.
+    for( const section of sections ){
+
+        let sectionTitle = section.getAttribute( 'data-nav' );
+        navHTML += `<li class="menu__link">${sectionTitle}</li>`;
+
+    }
+
+    navContainer.innerHTML = navHTML; // Insert the new links into the nav element.
+
 }
 
 
