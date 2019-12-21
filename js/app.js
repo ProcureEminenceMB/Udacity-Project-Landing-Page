@@ -19,12 +19,14 @@
 */
 
 
+const activeStyleClass = 'activeSection';
+
+
 /**
  * End Global Variables
  * Start Helper Functions
  * 
 */
-
 
 
 /**
@@ -54,8 +56,37 @@ function buildNav(){
 }
 
 
-// Add class 'activeSection' to section when near top of viewport.
+// Add 'activeSection' class to section when near top of viewport.
 function setActiveSection(){
+
+    const sections = document.querySelectorAll( 'section' );
+    const headerHeight = document.querySelector( 'header' ).offsetHeight;
+    const windowHeight = window.innerHeight;
+    const bottomMinPos = ( ( windowHeight - headerHeight ) * 0.5 ) + headerHeight; // 50% of the browser window height, minus the header height.
+    
+    // Loop through each section element and determine if any meet the active criteria.
+    for( const section of sections ){
+
+        const position = section.getBoundingClientRect();
+        
+        if( position.top < windowHeight && position.bottom > bottomMinPos ){
+            
+            // Only apply the active class if it isn't detected on the current element.
+            if( section.getAttribute( 'class' ) != activeStyleClass ){
+
+                // Remove activeSection class from previous active element.
+                document.querySelector( `.${activeStyleClass}` ).removeAttribute( 'class' );
+
+                // Apply activeSection class to the currently visible section.
+                section.setAttribute( 'class', activeStyleClass );
+
+            }
+
+            break;
+
+        }
+
+    }
 
 }
 
@@ -80,8 +111,9 @@ document.addEventListener('DOMContentLoaded', function (){
 
     scrollToSection();
 
-    // apply the following event handlers
+    // Apply event handlers
         // Scroll to section on link click
 
-        // Set sections as active
+    document.addEventListener( 'scroll', setActiveSection ); // Apply active sections event handler
+
 });
