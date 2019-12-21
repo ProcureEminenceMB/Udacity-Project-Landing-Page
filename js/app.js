@@ -92,7 +92,22 @@ function setActiveSection(){
 
 
 // Scroll to anchor ID using scrollTO event.
-function scrollToSection(){
+function scrollToSection( event ){
+
+    // Scroll to section if event is detected, otherwise scroll to top.
+    if( event ){
+
+        const headerHeight = document.querySelector( 'header' ).offsetHeight;
+        const sectionElement = document.querySelector( `[data-nav="${event.target.innerText}"]` );
+        const elementTop = sectionElement.offsetTop;
+
+        window.scrollTo( 0, elementTop - headerHeight );
+
+    }else{
+
+        window.scrollTo( 0, 0 );
+
+    }
 
 }
 
@@ -112,8 +127,7 @@ document.addEventListener('DOMContentLoaded', function (){
     scrollToSection();
 
     // Apply event handlers
-        // Scroll to section on link click
-
+    document.querySelector('#navbar__list').addEventListener( 'click', scrollToSection ); // Apply click event handler to nav ul
     document.addEventListener( 'scroll', setActiveSection ); // Apply active sections event handler
 
 });
