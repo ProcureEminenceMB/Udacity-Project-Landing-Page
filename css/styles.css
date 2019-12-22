@@ -90,8 +90,7 @@ section {
 }
 
 .menu__link__active {
-    background: #333;
-    color: #fff;
+    background: #eee;
 }
 
 /* Header Styles */

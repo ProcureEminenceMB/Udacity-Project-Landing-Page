@@ -18,8 +18,9 @@
  * 
 */
 
-
-const activeStyleClass = 'activeSection';
+const menuLinkClass = 'menu__link';
+const activeLinkClass = 'menu__link__active';
+const activeSectionClass = 'activeSection';
 
 
 /**
@@ -29,9 +30,17 @@ const activeStyleClass = 'activeSection';
 */
 
 
-function setActiveLink( selectedLink ){
+function setActiveLink( activeSectionName ){
 
-    
+    // Remove previous active link class.
+    if( document.querySelector( `.${activeLinkClass}` ) ){
+
+        let activeSection = document.querySelector( `.${activeLinkClass}` ).setAttribute( 'class', menuLinkClass );
+
+    }
+
+    // Apply active link class to the proper link.
+    document.querySelector( `li[data-nav="${activeSectionName}"]` ).setAttribute( 'class', menuLinkClass + ' ' + activeLinkClass );
 
 }
 
@@ -79,13 +88,20 @@ function setActiveSection(){
         if( position.top < windowHeight && position.bottom > bottomMinPos ){
             
             // Only apply the active class if it isn't detected on the current element.
-            if( section.getAttribute( 'class' ) != activeStyleClass ){
+            if( section.getAttribute( 'class' ) != activeSectionClass ){
 
                 // Remove activeSection class from previous active element.
-                document.querySelector( `.${activeStyleClass}` ).removeAttribute( 'class' );
+                if( document.querySelector( `.${activeSectionClass}` ) ){
+
+                    document.querySelector( `.${activeSectionClass}` ).removeAttribute( 'class' );
+
+                }
 
                 // Apply activeSection class to the currently visible section.
-                section.setAttribute( 'class', activeStyleClass );
+                section.setAttribute( 'class', activeSectionClass );
+
+                // Apply active style to matching link.
+                setActiveLink( section.getAttribute( 'data-nav' ) );
 
             }
 
@@ -128,9 +144,7 @@ function scrollToSection( event ){
 document.addEventListener('DOMContentLoaded', function (){
     
     buildNav();
-
     setActiveSection();
-
     scrollToSection();
 
     // Apply event handlers
