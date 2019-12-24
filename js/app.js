@@ -30,19 +30,6 @@ const activeSectionClass = 'activeSection';
 */
 
 
-function setActiveLink( activeSectionName ){
-
-    // Remove previous active link class.
-    if( document.querySelector( `.${activeLinkClass}` ) ){
-
-        let activeSection = document.querySelector( `.${activeLinkClass}` ).setAttribute( 'class', menuLinkClass );
-
-    }
-
-    // Apply active link class to the proper link.
-    document.querySelector( `li[data-nav="${activeSectionName}"]` ).setAttribute( 'class', menuLinkClass + ' ' + activeLinkClass );
-
-}
 
 
 /**
@@ -68,6 +55,22 @@ function buildNav(){
     }
 
     navContainer.innerHTML = navHTML; // Insert the new links into the nav element.
+
+}
+
+
+// Highlight the relevant link when a section is in view.
+function setActiveLink( activeSectionName ){
+
+    // Remove previous active link class.
+    if( document.querySelector( `.${activeLinkClass}` ) ){
+
+        let activeSection = document.querySelector( `.${activeLinkClass}` ).setAttribute( 'class', menuLinkClass );
+
+    }
+
+    // Apply active link class to the proper link.
+    document.querySelector( `li[data-nav="${activeSectionName}"]` ).setAttribute( 'class', menuLinkClass + ' ' + activeLinkClass );
 
 }
 
