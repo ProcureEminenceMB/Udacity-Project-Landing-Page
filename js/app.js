@@ -33,14 +33,14 @@ let windowHeight = window.innerHeight;
 
 
 // Store current window height
-function updateWindowHeight(){
+function updateWindowHeight() {
 
     windowHeight = window.innerHeight;
 
 }
 
 // Scroll to top
-function scrollToTop(){
+function scrollToTop() {
 
     window.scrollTo( 0, 0 );
 
@@ -54,15 +54,14 @@ function scrollToTop(){
 */
 
 // Build navigation based on page content.
-function buildNav(){
+function buildNav() {
 
     let navHTML = '';
     let navContainer = document.querySelector( '#navbar__list' ); // Get a reference to the nav container element.
-
     const sections = document.querySelectorAll( 'section' ); // Store a non-live NodeList containing all section elements.
 
     // Scan through all sections and create links for the nav.
-    for( const section of sections ){
+    for( const section of sections ) {
 
         let sectionTitle = section.getAttribute( 'data-nav' );
         navHTML += `<li class="menu__link" data-nav="${sectionTitle}">${sectionTitle}</li>`;
@@ -75,12 +74,12 @@ function buildNav(){
 
 
 // Highlight the relevant link when a section is in view.
-function setActiveLink( activeSectionName ){
+function setActiveLink( activeSectionName ) {
 
     // Remove previous active link class.
     if( document.querySelector( `.${activeLinkClass}` ) ){
 
-        let activeSection = document.querySelector( `.${activeLinkClass}` ).setAttribute( 'class', menuLinkClass );
+        document.querySelector( `.${activeLinkClass}` ).setAttribute( 'class', menuLinkClass );
 
     }
 
@@ -91,24 +90,24 @@ function setActiveLink( activeSectionName ){
 
 
 // Add 'activeSection' class to section when near top of viewport.
-function setActiveSection(){
+function setActiveSection() {
 
     const sections = document.querySelectorAll( 'section' );
     const headerHeight = document.querySelector( 'header' ).offsetHeight;
     const bottomMinPos = ( ( windowHeight - headerHeight ) * 0.5 ) + headerHeight; // 50% of the browser window height, minus the header height.
     
     // Loop through each section element and determine if any meet the active criteria.
-    for( const section of sections ){
+    for( const section of sections ) {
 
         const position = section.getBoundingClientRect();
         
-        if( position.top < windowHeight && position.bottom > bottomMinPos ){
+        if( position.top < windowHeight && position.bottom > bottomMinPos ) {
             
             // Only apply the active class if it isn't detected on the current element.
-            if( section.getAttribute( 'class' ) != activeSectionClass ){
+            if( section.getAttribute( 'class' ) != activeSectionClass ) {
 
                 // Remove activeSection class from previous active element.
-                if( document.querySelector( `.${activeSectionClass}` ) ){
+                if( document.querySelector( `.${activeSectionClass}` ) ) {
 
                     document.querySelector( `.${activeSectionClass}` ).removeAttribute( 'class' );
 
@@ -132,10 +131,10 @@ function setActiveSection(){
 
 
 // Scroll to anchor ID using scrollTO event.
-function scrollToSection( event ){
+function scrollToSection( event ) {
 
     // Scroll to section if event is detected, otherwise scroll to top.
-    if( event ){
+    if( event ) {
 
         const headerHeight = document.querySelector( 'header' ).offsetHeight;
         const sectionElement = document.querySelector( `section[data-nav="${event.target.innerText}"]` );
@@ -153,9 +152,9 @@ function scrollToSection( event ){
 
 
 // Show/Hide scroll to top button based on scroll position.
-function updateScrollButtonDisplay(){
+function updateScrollButtonDisplay() {
 
-    if( window.scrollY > windowHeight ){
+    if( window.scrollY > windowHeight ) {
 
         document.querySelector('#scrollToTopButton').style.display = "block";
 
@@ -173,19 +172,19 @@ function updateScrollButtonDisplay(){
  * 
 */
 
-document.addEventListener('DOMContentLoaded', function (){
+document.addEventListener('DOMContentLoaded', function () {
     
     buildNav();
     setActiveSection();
     scrollToSection();
 
     // Apply event handlers
-    document.querySelector('#navbar__list').addEventListener( 'click', scrollToSection ); // Apply click event handler to nav ul
-    document.querySelector('#scrollToTopButton').addEventListener( 'click', scrollToTop ); // Apply click event handler to the scroll button
+    document.querySelector('#navbar__list').addEventListener( 'click', scrollToSection ); // Apply click event handler to nav ul.
+    document.querySelector('#scrollToTopButton').addEventListener( 'click', scrollToTop ); // Apply click event handler to the scroll button.
     document.addEventListener( 'scroll', () => {
         setActiveSection();
         updateScrollButtonDisplay();
-        }); // Apply active sections and scroll button event handler
-    window.addEventListener( 'resize', updateWindowHeight );
+        }); // Apply active sections and scroll button event handler.
+    window.addEventListener( 'resize', updateWindowHeight ); // Apply resize event handler to the main window object.
 
 });

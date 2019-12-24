@@ -109,12 +109,12 @@ section {
     color: #fff;
 }
 
-.page__footer p{
+.page__footer p {
     color: #fff;
 }
 
 /* Misc Styles */
-#scrollToTopButton{
+#scrollToTopButton {
     display: none;
     position: fixed;
     width: auto;
