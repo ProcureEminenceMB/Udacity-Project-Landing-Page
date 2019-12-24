@@ -22,6 +22,8 @@ const menuLinkClass = 'menu__link';
 const activeLinkClass = 'menu__link__active';
 const activeSectionClass = 'activeSection';
 
+let windowHeight = window.innerHeight;
+
 
 /**
  * End Global Variables
@@ -30,6 +32,19 @@ const activeSectionClass = 'activeSection';
 */
 
 
+// Store current window height
+function updateWindowHeight(){
+
+    windowHeight = window.innerHeight;
+
+}
+
+// Scroll to top
+function scrollToTop(){
+
+    window.scrollTo( 0, 0 );
+
+}
 
 
 /**
@@ -80,7 +95,6 @@ function setActiveSection(){
 
     const sections = document.querySelectorAll( 'section' );
     const headerHeight = document.querySelector( 'header' ).offsetHeight;
-    const windowHeight = window.innerHeight;
     const bottomMinPos = ( ( windowHeight - headerHeight ) * 0.5 ) + headerHeight; // 50% of the browser window height, minus the header height.
     
     // Loop through each section element and determine if any meet the active criteria.
@@ -131,12 +145,27 @@ function scrollToSection( event ){
 
     }else{
 
-        window.scrollTo( 0, 0 );
+        scrollToTop();
 
     }
 
 }
 
+
+// Show/Hide scroll to top button based on scroll position.
+function updateScrollButtonDisplay(){
+
+    if( window.scrollY > windowHeight ){
+
+        document.querySelector('#scrollToTopButton').style.display = "block";
+
+    }else{
+
+        document.querySelector('#scrollToTopButton').style.display = "none";
+
+    }
+
+}
 
 /**
  * End Main Functions
@@ -152,6 +181,11 @@ document.addEventListener('DOMContentLoaded', function (){
 
     // Apply event handlers
     document.querySelector('#navbar__list').addEventListener( 'click', scrollToSection ); // Apply click event handler to nav ul
-    document.addEventListener( 'scroll', setActiveSection ); // Apply active sections event handler
+    document.querySelector('#scrollToTopButton').addEventListener( 'click', scrollToTop ); // Apply click event handler to the scroll button
+    document.addEventListener( 'scroll', () => {
+        setActiveSection();
+        updateScrollButtonDisplay();
+        }); // Apply active sections and scroll button event handler
+    window.addEventListener( 'resize', updateWindowHeight );
 
 });
