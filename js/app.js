@@ -156,11 +156,11 @@ function updateScrollButtonDisplay() {
 
     if( window.scrollY > windowHeight ) {
 
-        document.querySelector('#scrollToTopButton').style.display = "block";
+        document.querySelector( '#scrollToTopButton' ).style.display = "block";
 
     }else{
 
-        document.querySelector('#scrollToTopButton').style.display = "none";
+        document.querySelector( '#scrollToTopButton' ).style.display = "none";
 
     }
 
@@ -172,19 +172,19 @@ function updateScrollButtonDisplay() {
  * 
 */
 
-document.addEventListener('DOMContentLoaded', function () {
-    
+document.addEventListener( 'DOMContentLoaded', function () {
+
     buildNav();
     setActiveSection();
     scrollToSection();
 
     // Apply event handlers
-    document.querySelector('#navbar__list').addEventListener( 'click', scrollToSection ); // Apply click event handler to nav ul.
-    document.querySelector('#scrollToTopButton').addEventListener( 'click', scrollToTop ); // Apply click event handler to the scroll button.
+    document.querySelector( '#navbar__list' ).addEventListener( 'click', scrollToSection ); // Apply click event handler to nav ul.
+    document.querySelector( '#scrollToTopButton' ).addEventListener( 'click', scrollToTop ); // Apply click event handler to the scroll button.
     document.addEventListener( 'scroll', () => {
         setActiveSection();
         updateScrollButtonDisplay();
         }); // Apply active sections and scroll button event handler.
     window.addEventListener( 'resize', updateWindowHeight ); // Apply resize event handler to the main window object.
 
-});
+} );
